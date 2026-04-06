@@ -1,0 +1,10 @@
+{
+  "name": "nemochat",
+  "version": "1.0.0",
+  "description": "NemoChat Root Workspace",
+  "scripts": {
+    "install": "cd server && npm install && cd ../client && npm install",
+    "build": "cd client && npm run build",
+    "start": "cd server && npm start"
+  }
+}

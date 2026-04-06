@@ -29,12 +29,12 @@ const Chat = ({ user }) => {
   const fetchRoom = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get(`http://localhost:5000/api/rooms/${code}`, {
+      const res = await axios.get(`/api/rooms/${code}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setRoom(res.data);
       
-      const msgRes = await axios.get(`http://localhost:5000/api/rooms/${res.data._id}/messages`, {
+      const msgRes = await axios.get(`/api/rooms/${res.data._id}/messages`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMessages(msgRes.data);

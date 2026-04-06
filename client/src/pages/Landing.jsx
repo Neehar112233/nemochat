@@ -25,7 +25,7 @@ const Landing = () => {
     e.preventDefault();
     setHelpLoading(true);
     try {
-      await axios.post('http://localhost:5000/api/contact/send', {
+      await axios.post('/api/contact/send', {
         name: helpName,
         email: helpEmail,
         message: helpMessage,

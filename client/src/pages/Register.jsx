@@ -17,7 +17,7 @@ const Register = () => {
     setError('');
     
     try {
-      await axios.post('http://localhost:5000/api/auth/register', { username, password });
+      await axios.post('/api/auth/register', { username, password });
       navigate('/');
     } catch (err) {
       setError(err.response?.data?.msg || 'Something went wrong');

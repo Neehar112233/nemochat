@@ -10,6 +10,8 @@ const contactRoutes = require('./routes/contact');
 const Room = require('./models/Room');
 const Message = require('./models/Message');
 
+const path = require('path');
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -18,6 +20,13 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/rooms', roomRoutes);
 app.use('/api/contact', contactRoutes);
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/dist')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client', 'dist', 'index.html'));
+  });
+}
 
 const server = http.createServer(app);
 const io = socketIo(server, {

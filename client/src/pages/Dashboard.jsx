@@ -20,7 +20,7 @@ const Dashboard = ({ user }) => {
   const fetchRooms = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5000/api/rooms/public', {
+      const res = await axios.get('/api/rooms/public', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setRooms(res.data);
@@ -35,7 +35,7 @@ const Dashboard = ({ user }) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.post('http://localhost:5000/api/rooms/create', 
+      const res = await axios.post('/api/rooms/create', 
         { name: newRoomName, isPrivate },
         { headers: { Authorization: `Bearer ${token}` } }
       );

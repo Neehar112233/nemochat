@@ -21,8 +21,8 @@ const Admin = ({ user }) => {
     try {
       const token = localStorage.getItem('token');
       const [roomsRes, msgsRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/rooms/all', { headers: { Authorization: `Bearer ${token}` } }),
-        axios.get('http://localhost:5000/api/contact/all', { headers: { Authorization: `Bearer ${token}` } }),
+        axios.get('/api/rooms/all', { headers: { Authorization: `Bearer ${token}` } }),
+        axios.get('/api/contact/all', { headers: { Authorization: `Bearer ${token}` } }),
       ]);
       setRooms(roomsRes.data);
       setMessages(msgsRes.data);
@@ -37,7 +37,7 @@ const Admin = ({ user }) => {
     if (!window.confirm('Are you sure you want to delete this room?')) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/rooms/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.delete(`/api/rooms/${id}`, { headers: { Authorization: `Bearer ${token}` } });
       setRooms(rooms.filter(room => room._id !== id));
     } catch (err) {
       alert('Error deleting room');
@@ -47,7 +47,7 @@ const Admin = ({ user }) => {
   const markAsRead = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.patch(`http://localhost:5000/api/contact/${id}/read`, {}, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.patch(`/api/contact/${id}/read`, {}, { headers: { Authorization: `Bearer ${token}` } });
       setMessages(messages.map(m => m._id === id ? { ...m, read: true } : m));
     } catch (err) {
       alert('Error marking as read');
@@ -58,7 +58,7 @@ const Admin = ({ user }) => {
     if (!window.confirm('Delete this message permanently?')) return;
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/api/contact/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.delete(`/api/contact/${id}`, { headers: { Authorization: `Bearer ${token}` } });
       setMessages(messages.filter(m => m._id !== id));
     } catch (err) {
       alert('Error deleting message');
